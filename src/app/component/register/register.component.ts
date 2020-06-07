@@ -72,5 +72,7 @@ export class RegisterComponent implements OnInit {
         });
 
     }
+    this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+
   }
 }
