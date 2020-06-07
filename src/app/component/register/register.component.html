@@ -1,3 +1,4 @@
+<!-- <p-toast position="top-right" ></p-toast>
 <div class="container">
   <div class="row">
     <div class="col-md-8 mx-auto">
@@ -52,6 +53,78 @@
               <button type="submit" class="btn btn-success">Register</button>
             </div>
           </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+<p-toast position="top-right"></p-toast>
+<div class="container">
+
+
+  <div class="row" style="margin-top:5px;box-shadow: -1px 1px 50px 10px; background-color: black;">
+    <div class="col-md-4"> </div>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-7">
+          <ul>
+            <a style="padding:90px">SIGN UP</a>
+          </ul>
+          <form class="form" [formGroup]="RegisterFormGroup" (ngSubmit)="onRegister(RegisterFormGroup)">
+
+            <div class="form-group">
+              <label for="inputName" class="label control-label">Name</label>
+              <input type="text" class="form-control" id="inputName" placeholder="Name" formControlName="name">
+              <span class="text-danger"
+                *ngIf="(registerFormControl.name.touched || submitted) && registerFormControl.name.errors?.required">
+                Name is required
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="inputUserName" class="label control-label">User Name</label>
+              <input type="text" class="form-control" id="inputName" placeholder="User Name" formControlName="username">
+              <span class="text-danger"
+                *ngIf="(registerFormControl.username.touched || submitted) && registerFormControl.username.errors?.required">
+                User Name is required
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="inputPassword" class="label control-label">Password</label>
+              <input type="password" class="form-control" placeholder="Password" formControlName="password">
+              <span class="text-danger"
+                *ngIf="(registerFormControl.password.touched || submitted) && registerFormControl.password.errors?.required">
+                Password is required
+              </span>
+              <span class="text-danger"
+                *ngIf="registerFormControl.password.touched && registerFormControl.password.errors?.invalidPassword">
+                Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase
+                letter and 1 number
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="inputConfPassword" class="label control-label">Confirm Password</label>
+              <input type="password" class="form-control" formControlName="confirmPassword">
+              <span class="text-danger"
+                *ngIf="(registerFormControl.confirmPassword.touched || submitted)&& registerFormControl.confirmPassword.errors?.required">
+                Confirm Password is required
+              </span>
+              <span class="text-danger"
+                *ngIf="registerFormControl.confirmPassword.touched && registerFormControl.confirmPassword.errors?.passwordMismatch">
+                Passwords doesnot match
+              </span>
+            </div>
+            <div class="form-group row" style="padding-left: 25px;">
+              <button type="submit" class="btn btn-info">SIGN UP</button>
+              <button type="button" class="btn btn-info" routerLink="/">SIGN IN</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-md-6">
+          <img src="">
         </div>
       </div>
     </div>

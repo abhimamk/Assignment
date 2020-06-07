@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AppConstant } from '../component/app.constant';
 import { Login } from '../ModuleClass/loginClass.module';
+import { catchError} from 'rxjs/operators';
+import { throwError } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,11 +19,23 @@ export class ApicallService {
     this.LOGIN_USER = this.APPEND_POINT + AppConstant.API_CONFIG.API_URL.API.USER_LOGIN;
     this.ADD_NEW_USER = this.APPEND_POINT + AppConstant.API_CONFIG.API_URL.API.USER_LOGIN;
 
-   }
-   getLogin_User() {
-     return this.http.get<Login[]>(this.LOGIN_USER);
-   }
-   addNewUser(addNew) {
-     return this.http.post(this.ADD_NEW_USER, addNew);
-   }
+  }
+  getLogin_User() {
+    return this.http.get<Login[]>(this.LOGIN_USER).pipe(
+      catchError(this.handleError)
+    );
+  }
+  addNewUser(addNew) {
+    return this.http.post(this.ADD_NEW_USER, addNew).pipe(
+      catchError(this.handleError)
+    );
+  }
+  private handleError(ex: HttpErrorResponse) {
+    if (ex.error instanceof ErrorEvent) {
+      alert('client side error');
+    } else {
+      alert('server side error');
+    }
+    return throwError('something went wrong');
+  }
 }

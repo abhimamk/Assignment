@@ -1,30 +1,48 @@
+
+<p-toast position="top-right" ></p-toast>
 <div class="container">
-  <form [formGroup]="LoginFormGroup" (ngSubmit)="onSubmit(LoginFormGroup)">
-    <div class="form-group">
-      <label for="inputEmail">UserName</label>
-      <input type="email" class="form-control" id="inputEmail" placeholder="UserName" formControlName="username"
-        [ngClass]="{ 'is-invalid': submitted && loginFormControl.username.errors }">
-      <span class="text-danger"
-        *ngIf="(loginFormControl.username.touched || submitted) && loginFormControl.username.errors?.required">
-        UserName is required
-      </span>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword">Password</label>
-      <input type="password" class="form-control" id="inputPassword" placeholder="Password" formControlName="password"
-        [ngClass]="{ 'is-invalid': submitted && loginFormControl.password.errors }">
-      <span class="text-danger"
-        *ngIf="(loginFormControl.password.touched || submitted) && loginFormControl.password.errors?.required">
-        Password is required
-      </span>
-    </div>
-    <div class="form-group">
-      <label class="form-check-label"><input type="checkbox"> Remember me</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
-    <span><a class="btn btn-primary" routerLink="/register">Sign Up</a>
-    </span>
-  </form>
 
 
+  <div class="row" style="margin-top:5px;box-shadow: -1px 1px 50px 10px; background-color: black;">
+    <div class="col-md-4"> </div>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-7">
+          <ul>
+            <a style="padding:90px">SIGN IN</a>
+          </ul>
+          <form [formGroup]="LoginFormGroup" (ngSubmit)="onSubmit(LoginFormGroup)">
+            <div class="form-group">
+              <label for="inputName" class="label control-label">User Name</label>
+              <input type="text" class="form-control" id="inputEmail" placeholder="UserName" formControlName="username"
+                [ngClass]="{ 'is-invalid': submitted && loginFormControl.username.errors }">
+              <span class="text-danger"
+                *ngIf="(loginFormControl.username.touched || submitted) && loginFormControl.username.errors?.required">
+                UserName is required
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="inputPassword" class="label control-label">Password</label>
+              <input type="password" class="form-control" id="inputPassword" placeholder="Password" formControlName="password"
+                [ngClass]="{ 'is-invalid': submitted && loginFormControl.password.errors }">
+              <span class="text-danger"
+                *ngIf="(loginFormControl.password.touched || submitted) && loginFormControl.password.errors?.required">
+                Password is required
+              </span>
+            </div>
+            <input type="radio"><small>Remember me ?</small>
+            <div class="form-group row" style="padding-left: 25px;">
+              <button type="submit" class="btn btn-info">SIGN IN</button>
+              <button type="button" class="btn btn-info" routerLink="/register">SIGN UP</button>
+            </div>
+            <p class="text-center">FORGET PASSWORD ?</p>
+          </form>
+        </div>
+
+      <div class="col-md-6">
+      </div>
+    </div>
+    </div>
+  </div>
 </div>
+

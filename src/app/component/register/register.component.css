@@ -1,0 +1,91 @@
+/*
+.card-signin .card-title {
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+.card-signin .card-body {
+  padding: 2rem;
+}
+.form-signin {
+  width: 100%;
+}
+.form-signin .btn {
+  font-size: 80%;
+  border-radius: 5rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+  padding: 1rem;
+  transition: all 0.2s;
+}
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+.form-label-group input {
+  height: auto;
+  border-radius: 2rem;
+} */
+
+.container {
+  /* background-image: url("https://image.freepik.com/free-photo/flat-lay-top-view-office-table-desk-workspace-with-calculator-pen-laptop-note-black-background_101276-134.jpg"); */
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: "Times New Roman";
+}
+ul {
+  margin-bottom: 50px;
+}
+ul a {
+  font-size: 25px;
+  color: white;
+}
+ul a:hover {
+  color: gray;
+}
+.label {
+  font: size 20px;
+  color: white;
+  font-weight: normal;
+}
+.form-control {
+  background: transparent;
+  border-radius: 0px;
+  border: 0px;
+  border-bottom: 1px solid #f44c89;
+  margin-bottom: 30px;
+  font-size: 22px;
+  color: white;
+  padding: 20px;
+}
+input[type="checkbox"] {
+  height: 15px;
+  width: 15px;
+}
+small {
+  font-size: 19px;
+  color: white;
+}
+.btn-info {
+  background: #f44c89;
+  border: 2px solid #f44c89;
+  border-radius: 0px;
+  width: 160px;
+  margin-top: 15px;
+  font-size: 20px;
+  background: transparent;
+}
+.btn-info:hover {
+  background:#f44c89;
+  border:2px solid #f44c89;
+
+}
+p{
+  font-size:18px;
+  margin-top:40px;
+  color: gray;
+}
+img{
+  widows: 477px;
+  height: 477px;
+}

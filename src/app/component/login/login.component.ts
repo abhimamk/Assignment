@@ -1,9 +1,10 @@
-import { Login } from './../../ModuleClass/loginClass.module';
-import { Component, OnInit } from '@angular/core';
+import { HomeComponent } from './../../Menu/home/home.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApicallService } from './../../service/apicall.service';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   subscription: Subscription;
+  @ViewChild(HomeComponent, { static: false }) sendData: HomeComponent;
+
   // FormGroup
   LoginFormGroup: FormGroup;
   // Array
@@ -20,7 +23,8 @@ export class LoginComponent implements OnInit {
   // boolean
   submitted = false;
 
-  constructor(private callService: ApicallService, private fb: FormBuilder, private router: Router) { }
+  constructor(private callService: ApicallService, private fb: FormBuilder, private router: Router,
+    private messageService: MessageService) { }
 
   ngOnInit() {
     this.ReactiveForm();
@@ -52,12 +56,15 @@ export class LoginComponent implements OnInit {
     console.log(information);
     for (let i = 0; i < this.loginInfo.length; i++) {
       if (this.loginInfo[i].username === information.value.username && this.loginInfo[i].password === information.value.password) {
-        console.log('Login Done');
+        // this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Login' });
         this.router.navigate(['home']);
         this.loginInfo = [];
         return;
       }
     }
-    alert('invalid');
+    this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+
+  }
+  showSuccess() {
   }
 }

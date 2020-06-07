@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApicallService } from './../../service/apicall.service';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,7 @@ export class RegisterComponent implements OnInit {
   // Date
   toDayDate: Date;
   constructor(private callService: ApicallService, private fb: FormBuilder, private router: Router,
-    private customValidator: CustomvalidationService) { }
+    private customValidator: CustomvalidationService, private messageService: MessageService) { }
 
   ngOnInit() {
     this.ReactiveForm();
@@ -52,8 +53,19 @@ export class RegisterComponent implements OnInit {
       )).subscribe(
         (response: any) => {
           console.log(response);
+          setTimeout(() => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success Message',
+              detail: 'Successfully Register'
+            });
+          }, 1000);
         },
-        error => console.log(error),
+        error => {
+          this.messageService.add({ severity: 'warn', summary: 'Warn   Message', detail: 'Failed Register' });
+
+          console.log(error);
+        },
         () => {
           this.router.navigate(['/']);
           this.RegisterFormGroup.reset();
