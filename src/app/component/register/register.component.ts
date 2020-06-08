@@ -1,10 +1,11 @@
 import { CustomvalidationService } from './../../service/customvalidation.service';
 import { Login } from './../../ModuleClass/loginClass.module';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApicallService } from './../../service/apicall.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +13,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
   RegisterFormGroup: FormGroup;
   // boolean
   submitted = false;
@@ -43,7 +45,7 @@ export class RegisterComponent implements OnInit {
   onRegister(RegisterFormGroup) {
     this.submitted = true;
     if (this.RegisterFormGroup.valid) {
-      this.callService.addNewUser(new Login(
+        this.callService.addNewUser(new Login(
         RegisterFormGroup.value.id,
         RegisterFormGroup.value.createdAt,
         RegisterFormGroup.value.name,
@@ -64,15 +66,16 @@ export class RegisterComponent implements OnInit {
         error => {
           this.messageService.add({ severity: 'warn', summary: 'Warn   Message', detail: 'Failed Register' });
 
-          console.log(error);
         },
         () => {
           this.router.navigate(['/']);
           this.RegisterFormGroup.reset();
         });
 
+    } else {
+
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Enter Required Details' });
     }
-    this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
 
   }
 }

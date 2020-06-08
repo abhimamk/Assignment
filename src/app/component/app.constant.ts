@@ -32,6 +32,7 @@ export const AppConstant = Object.freeze({
 
       API: {
         USER_LOGIN: 'login',
+        ARTICLES: 'articles'
       },
 
     }

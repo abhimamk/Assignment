@@ -4,6 +4,7 @@ import { AppConstant } from '../component/app.constant';
 import { Login } from '../ModuleClass/loginClass.module';
 import { catchError} from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { Atilce } from '../Menu/home/article';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,13 @@ export class ApicallService {
   APPEND_POINT: string;
   LOGIN_USER: string;
   ADD_NEW_USER: string;
+  GETARTICLE: string;
   constructor(private http: HttpClient) {
     this.API_URL = AppConstant.API_ENDPOINT;
     this.APPEND_POINT = this.API_URL;
     this.LOGIN_USER = this.APPEND_POINT + AppConstant.API_CONFIG.API_URL.API.USER_LOGIN;
     this.ADD_NEW_USER = this.APPEND_POINT + AppConstant.API_CONFIG.API_URL.API.USER_LOGIN;
+    this.GETARTICLE =  this.ADD_NEW_USER = this.APPEND_POINT + AppConstant.API_CONFIG.API_URL.API.ARTICLES;
 
   }
   getLogin_User() {
@@ -27,6 +30,11 @@ export class ApicallService {
   }
   addNewUser(addNew) {
     return this.http.post(this.ADD_NEW_USER, addNew).pipe(
+      catchError(this.handleError)
+    );
+  }
+  getArticle() {
+    return this.http.get<Atilce[]>(this.GETARTICLE).pipe(
       catchError(this.handleError)
     );
   }

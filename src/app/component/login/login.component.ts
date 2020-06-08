@@ -1,5 +1,5 @@
 import { HomeComponent } from './../../Menu/home/home.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ApicallService } from './../../service/apicall.service';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -11,7 +11,7 @@ import { MessageService } from 'primeng/api';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   @ViewChild(HomeComponent, { static: false }) sendData: HomeComponent;
 
@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
     this.subscription = this.callService.getLogin_User().subscribe(
       (response: any[]) => {
         this.loginInfo = response;
-        console.log(response);
       }
     );
   }
@@ -62,9 +61,10 @@ export class LoginComponent implements OnInit {
         return;
       }
     }
-    this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+    this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Check Username or password.Miss Match Enter Correctly' });
 
   }
-  showSuccess() {
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

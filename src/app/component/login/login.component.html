@@ -1,11 +1,10 @@
 
 <p-toast position="top-right" ></p-toast>
 <div class="container">
-
-
   <div class="row" style="margin-top:5px;box-shadow: -1px 1px 50px 10px; background-color: black;">
     <div class="col-md-4"> </div>
     <div class="col-md-8">
+      <ng-container>
       <div class="row">
         <div class="col-md-7">
           <ul>
@@ -30,18 +29,17 @@
                 Password is required
               </span>
             </div>
-            <input type="radio"><small>Remember me ?</small>
             <div class="form-group row" style="padding-left: 25px;">
               <button type="submit" class="btn btn-info">SIGN IN</button>
-              <button type="button" class="btn btn-info" routerLink="/register">SIGN UP</button>
+              <button type="button" class="btn btn-info" routerLink="register">SIGN UP</button>
             </div>
-            <p class="text-center">FORGET PASSWORD ?</p>
           </form>
         </div>
 
       <div class="col-md-6">
       </div>
     </div>
+  </ng-container>
     </div>
   </div>
 </div>
