@@ -20,7 +20,7 @@ export class ApicallService {
     this.APPEND_POINT = this.API_URL;
     this.LOGIN_USER = this.APPEND_POINT + AppConstant.API_CONFIG.API_URL.API.USER_LOGIN;
     this.ADD_NEW_USER = this.APPEND_POINT + AppConstant.API_CONFIG.API_URL.API.USER_LOGIN;
-    this.GETARTICLE =  this.ADD_NEW_USER = this.APPEND_POINT + AppConstant.API_CONFIG.API_URL.API.ARTICLES;
+    this.GETARTICLE =  this.APPEND_POINT + AppConstant.API_CONFIG.API_URL.API.ARTICLES;
 
   }
   getLogin_User() {
