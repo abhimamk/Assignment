@@ -1,10 +1,10 @@
-import { HomeComponent } from './../../Menu/home/home.component';
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApicallService } from './../../service/apicall.service';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { MainService} from '../../service/main.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,6 @@ import { MessageService } from 'primeng/api';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   subscription: Subscription;
-  @ViewChild(HomeComponent, { static: false }) sendData: HomeComponent;
 
   // FormGroup
   LoginFormGroup: FormGroup;
@@ -23,8 +22,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   // boolean
   submitted = false;
 
-  constructor(private callService: ApicallService, private fb: FormBuilder, private router: Router,
-    private messageService: MessageService) { }
+  constructor(
+    private callService: ApicallService, private fb: FormBuilder,
+    private router: Router, private messageService: MessageService,
+    private mainService: MainService) { }
 
   ngOnInit() {
     this.ReactiveForm();
@@ -51,6 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     return this.LoginFormGroup.controls;
   }
   onSubmit(information) {
+    this.mainService.changeMessage(information);
     this.submitted = true;
     console.log(information);
     for (let i = 0; i < this.loginInfo.length; i++) {
@@ -61,7 +63,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         return;
       }
     }
-    this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Check Username or password.Miss Match Enter Correctly' });
+    this.messageService.add(
+      { severity: 'error', summary: 'Error Message', detail: 'Check Username or password.Miss Match Enter Correctly' });
 
   }
   ngOnDestroy() {

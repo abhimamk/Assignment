@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import {DialogModule} from 'primeng/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {ToastModule} from 'primeng/toast';
 
 
 @NgModule({
@@ -11,7 +14,10 @@ import { HomeComponent } from './home.component';
   imports: [
     CommonModule,
     HomeRoutingModule,
-
+    DialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ToastModule
   ]
 })
 export class HomeModule { }

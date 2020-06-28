@@ -17,13 +17,25 @@ export class RegisterComponent implements OnInit {
   RegisterFormGroup: FormGroup;
   // boolean
   submitted = false;
+  checkUser = false;
   // Date
   toDayDate: Date;
-  constructor(private callService: ApicallService, private fb: FormBuilder, private router: Router,
+  // Array
+  loginInfo: any[];
+  constructor(
+    private callService: ApicallService, private fb: FormBuilder, private router: Router,
     private customValidator: CustomvalidationService, private messageService: MessageService) { }
 
   ngOnInit() {
     this.ReactiveForm();
+    this.getLoginDetails();
+  }
+  getLoginDetails() {
+    this.callService.getLogin_User().subscribe(
+      (response: any[]) => {
+        this.loginInfo = response;
+      }
+    );
   }
   ReactiveForm() {
     this.RegisterFormGroup = this.fb.group({
@@ -42,39 +54,62 @@ export class RegisterComponent implements OnInit {
   get registerFormControl() {
     return this.RegisterFormGroup.controls;
   }
+  checkUserRegister(RegisterFormGroup) {
+    for (let i = 0; i < this.loginInfo.length; i++) {
+      if (
+        this.loginInfo[i].username === RegisterFormGroup.value.username) {
+        return this.checkUser = false;
+      }
+    }
+    return this.checkUser = true;
+  }
+
+
   onRegister(RegisterFormGroup) {
     this.submitted = true;
-    if (this.RegisterFormGroup.valid) {
+    this.checkUserRegister(RegisterFormGroup);
+    if (this.checkUser === true) {
+      if (this.RegisterFormGroup.valid) {
         this.callService.addNewUser(new Login(
-        RegisterFormGroup.value.id,
-        RegisterFormGroup.value.createdAt,
-        RegisterFormGroup.value.name,
-        RegisterFormGroup.value.avatar,
-        RegisterFormGroup.value.username,
-        RegisterFormGroup.value.password
-      )).subscribe(
-        (response: any) => {
-          console.log(response);
-          setTimeout(() => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Success Message',
-              detail: 'Successfully Register'
-            });
-          }, 1000);
-        },
-        error => {
-          this.messageService.add({ severity: 'warn', summary: 'Warn   Message', detail: 'Failed Register' });
+          RegisterFormGroup.value.id,
+          RegisterFormGroup.value.createdAt,
+          RegisterFormGroup.value.name,
+          RegisterFormGroup.value.avatar,
+          RegisterFormGroup.value.username,
+          RegisterFormGroup.value.password
+        )).subscribe(
+          (response: any) => {
+            console.log(response);
+            setTimeout(() => {
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Success Message',
+                detail: 'Successfully Register'
+              });
+            }, 1000);
+          },
+          error => {
+            this.messageService.add({ severity: 'warn', summary: 'Warn   Message', detail: 'Failed Register' });
 
-        },
-        () => {
-          this.router.navigate(['/']);
-          this.RegisterFormGroup.reset();
-        });
+          },
+          () => {
+            this.router.navigate(['/']);
+            this.RegisterFormGroup.reset();
+          });
+
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Enter Required Details' });
+        this.checkUser = false;
+      }
 
     } else {
-
-      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Enter Required Details' });
+      // this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Enter Required Details' });
+      this.checkUser = false;
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Warn Message',
+        detail: 'UserName Already Register'
+      });
     }
 
   }

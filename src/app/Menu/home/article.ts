@@ -1,4 +1,4 @@
-export class Atilce {
+export class Article {
   constructor(
     public id: string,
     public createdAt: string,

@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing';
 import { HttpClientModule } from '@angular/common/http';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound/pagenotfound.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MainService } from './service/main.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [MessageService],
+  providers: [MessageService, MainService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
