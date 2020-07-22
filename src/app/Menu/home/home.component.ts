@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.checkAdminn = true;
       return this.checkAdminn = true;
     } else {
-      this.messageService.add({ severity: 'Danger', summary: 'Danger Message', detail: 'Your Not Admin' });
+      this.messageService.add({ severity: 'warn', summary: 'Warn Message', detail: 'Your Not Admin' });
       return this.checkAdminn = false;
 
     }
